@@ -42,7 +42,6 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         // 改为阿里云的镜像地址
         maven { setUrl("https://maven.aliyun.com/repository/central") }

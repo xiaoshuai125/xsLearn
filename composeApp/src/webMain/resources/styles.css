@@ -4,4 +4,5 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Sans SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
 }

@@ -1,56 +1,88 @@
 package vip.xsinfo.xslearn.xslearn
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.navigationevent.NavigationEvent
-import org.jetbrains.compose.resources.painterResource
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import vip.xsinfo.xslearn.xslearn.navigation.BottomNavigationBar
+import vip.xsinfo.xslearn.xslearn.navigation.DeviceType
+import vip.xsinfo.xslearn.xslearn.navigation.HOME_ROUTE
+import vip.xsinfo.xslearn.xslearn.navigation.PROFILE_ROUTE
+import vip.xsinfo.xslearn.xslearn.navigation.SETTINGS_ROUTE
+import vip.xsinfo.xslearn.xslearn.navigation.SideNavigationDrawer
+import vip.xsinfo.xslearn.xslearn.navigation.getDeviceType
+import vip.xsinfo.xslearn.xslearn.screens.HomeScreen
+import vip.xsinfo.xslearn.xslearn.screens.ProfileScreen
+import vip.xsinfo.xslearn.xslearn.screens.SettingsScreen
+import vip.xsinfo.xslearn.xslearn.theme.AppTheme
 
-import xslearn.composeapp.generated.resources.Res
-import xslearn.composeapp.generated.resources.compose_multiplatform
-
+/**
+ * 应用主入口
+ */
 @Composable
 @Preview
+@PreviewScreenSizes
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+    AppTheme {
+        val navController = rememberNavController()
+        val backStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = backStackEntry?.destination?.route
+        val deviceType = getDeviceType()
+
+        when (deviceType) {
+            DeviceType.PHONE -> {
+                // 手机设备使用底部导航栏
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(navController, currentRoute)
+                    }
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    NavHost(
+                        navController = navController,
+                        startDestination = HOME_ROUTE
+                    ) {
+                        composable(HOME_ROUTE) {
+                            HomeScreen()
+                        }
+                        composable(PROFILE_ROUTE) {
+                            ProfileScreen()
+                        }
+                        composable(SETTINGS_ROUTE) {
+                            SettingsScreen()
+                        }
+                    }
+                }
+            }
+            DeviceType.TABLET -> {
+                // 平板设备使用侧边导航栏
+                Row(modifier = Modifier.fillMaxSize()) {
+                    // 左侧导航栏
+                    SideNavigationDrawer(navController, currentRoute)
+                    // 右侧内容区域
+                    NavHost(
+                        navController = navController,
+                        startDestination = HOME_ROUTE,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        composable(HOME_ROUTE) {
+                            HomeScreen()
+                        }
+                        composable(PROFILE_ROUTE) {
+                            ProfileScreen()
+                        }
+                        composable(SETTINGS_ROUTE) {
+                            SettingsScreen()
+                        }
+                    }
                 }
             }
         }
