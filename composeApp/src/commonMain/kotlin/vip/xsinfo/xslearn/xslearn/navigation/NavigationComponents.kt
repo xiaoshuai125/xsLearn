@@ -3,7 +3,9 @@ package vip.xsinfo.xslearn.xslearn.navigation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -17,6 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import compose.icons.CssGgIcons
+import compose.icons.cssggicons.Home
+import compose.icons.cssggicons.Profile
+import compose.icons.cssggicons.Toolbox
 
 /**
  * 底部导航栏
@@ -33,15 +39,8 @@ fun BottomNavigationBar(
             selected = currentRoute == HOME_ROUTE,
             onClick = { navController.navigate(HOME_ROUTE) },
             label = { Text("首页") },
-            icon = { 
-                Text(
-                    text = "首",
-                    color = if (currentRoute == HOME_ROUTE) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        LocalContentColor.current
-                    }
-                ) 
+            icon = {
+                Icon(CssGgIcons.Home, contentDescription = null)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -54,16 +53,9 @@ fun BottomNavigationBar(
         NavigationBarItem(
             selected = currentRoute == PROFILE_ROUTE,
             onClick = { navController.navigate(PROFILE_ROUTE) },
-            label = { Text("个人资料") },
-            icon = { 
-                Text(
-                    text = "个",
-                    color = if (currentRoute == PROFILE_ROUTE) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        LocalContentColor.current
-                    }
-                ) 
+            label = { Text("个人") },
+            icon = {
+                Icon(CssGgIcons.Profile, contentDescription = null)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -77,15 +69,8 @@ fun BottomNavigationBar(
             selected = currentRoute == SETTINGS_ROUTE,
             onClick = { navController.navigate(SETTINGS_ROUTE) },
             label = { Text("设置") },
-            icon = { 
-                Text(
-                    text = "设",
-                    color = if (currentRoute == SETTINGS_ROUTE) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        LocalContentColor.current
-                    }
-                ) 
+            icon = {
+                Icon(CssGgIcons.Toolbox, contentDescription = null)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -99,7 +84,7 @@ fun BottomNavigationBar(
 }
 
 /**
- * 侧边导航栏
+ * 侧边导航栏（紧凑模式）
  * @param navController 导航控制器
  * @param currentRoute 当前路由
  */
@@ -110,16 +95,17 @@ fun SideNavigationDrawer(
 ) {
     Column(
         modifier = Modifier
-            .width(250.dp)
+            .width(120.dp)
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(top = 16.dp, bottom = 16.dp, start = 5.dp, end = 5.dp)
     ) {
         NavigationDrawerItem(
             label = { Text("首页") },
             icon = { 
-                Text(
-                    text = "首",
-                    color = if (currentRoute == HOME_ROUTE) {
+                Icon(
+                    imageVector = CssGgIcons.Home,
+                    contentDescription = "首页",
+                    tint = if (currentRoute == HOME_ROUTE) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         LocalContentColor.current
@@ -128,22 +114,20 @@ fun SideNavigationDrawer(
             },
             selected = currentRoute == HOME_ROUTE,
             onClick = { navController.navigate(HOME_ROUTE) },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
             colors = NavigationDrawerItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
                 unselectedIconColor = LocalContentColor.current,
-                unselectedTextColor = LocalContentColor.current,
-                selectedContainerColor = Color.Transparent, // 移除背景色高亮
+                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                 unselectedContainerColor = Color.Transparent
             )
         )
         NavigationDrawerItem(
-            label = { Text("个人资料") },
+            label = { Text("个人") },
             icon = { 
-                Text(
-                    text = "个",
-                    color = if (currentRoute == PROFILE_ROUTE) {
+                Icon(
+                    imageVector = CssGgIcons.Profile,
+                    contentDescription = "个人",
+                    tint = if (currentRoute == PROFILE_ROUTE) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         LocalContentColor.current
@@ -152,22 +136,20 @@ fun SideNavigationDrawer(
             },
             selected = currentRoute == PROFILE_ROUTE,
             onClick = { navController.navigate(PROFILE_ROUTE) },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
             colors = NavigationDrawerItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
                 unselectedIconColor = LocalContentColor.current,
-                unselectedTextColor = LocalContentColor.current,
-                selectedContainerColor = Color.Transparent, // 移除背景色高亮
+                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                 unselectedContainerColor = Color.Transparent
             )
         )
         NavigationDrawerItem(
             label = { Text("设置") },
             icon = { 
-                Text(
-                    text = "设",
-                    color = if (currentRoute == SETTINGS_ROUTE) {
+                Icon(
+                    imageVector = CssGgIcons.Toolbox,
+                    contentDescription = "设置",
+                    tint = if (currentRoute == SETTINGS_ROUTE) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         LocalContentColor.current
@@ -176,13 +158,10 @@ fun SideNavigationDrawer(
             },
             selected = currentRoute == SETTINGS_ROUTE,
             onClick = { navController.navigate(SETTINGS_ROUTE) },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
             colors = NavigationDrawerItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
                 unselectedIconColor = LocalContentColor.current,
-                unselectedTextColor = LocalContentColor.current,
-                selectedContainerColor = Color.Transparent, // 移除背景色高亮
+                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                 unselectedContainerColor = Color.Transparent
             )
         )
