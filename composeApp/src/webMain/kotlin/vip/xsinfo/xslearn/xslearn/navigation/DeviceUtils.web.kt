@@ -5,7 +5,36 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import kotlin.js.js
+import kotlin.js.JsAny
+import kotlin.js.Promise
+
+/**
+ * 获取 window 对象的 innerWidth 属性
+ */
+@JsFun("() => window.innerWidth")
+external fun getWindowInnerWidth(): Int
+
+/**
+ * 添加 resize 事件监听器
+ */
+@JsFun("""
+    (callback) => {
+        const handler = () => callback();
+        window.addEventListener('resize', handler);
+        return handler;
+    }
+""")
+external fun addResizeListener(callback: () -> Unit): JsAny
+
+/**
+ * 移除 resize 事件监听器
+ */
+@JsFun("""
+    (handler) => {
+        window.removeEventListener('resize', handler);
+    }
+""")
+external fun removeResizeListener(handler: JsAny)
 
 /**
  * Web 平台的设备类型检测实现
@@ -16,23 +45,19 @@ actual fun getDeviceType(): DeviceType {
     val deviceTypeState: MutableState<DeviceType> = remember {
         mutableStateOf(calculateDeviceType())
     }
-    
+
     // 监听窗口大小变化
-    val currentWindow = js("window")
-    DisposableEffect(currentWindow) {
-        val resizeHandler: (dynamic) -> Unit = {
+    DisposableEffect(Unit) {
+        val handler = addResizeListener {
             deviceTypeState.value = calculateDeviceType()
         }
-        
-        // 添加 resize 事件监听器
-        currentWindow?.addEventListener("resize", resizeHandler)
-        
+
         // 清理函数
         onDispose {
-            currentWindow?.removeEventListener("resize", resizeHandler)
+            removeResizeListener(handler)
         }
     }
-    
+
     return deviceTypeState.value
 }
 
@@ -40,9 +65,8 @@ actual fun getDeviceType(): DeviceType {
  * 计算当前设备类型
  */
 private fun calculateDeviceType(): DeviceType {
-    val currentWindow = js("window")
-    val screenWidth = currentWindow?.innerWidth ?: 0
-    
+    val screenWidth = getWindowInnerWidth()
+
     // 以屏幕宽度768像素作为平板的判断标准
     return if (screenWidth >= 768) {
         DeviceType.TABLET
