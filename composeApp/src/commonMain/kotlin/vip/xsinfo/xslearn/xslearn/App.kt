@@ -16,13 +16,15 @@ import androidx.navigation.compose.rememberNavController
 import vip.xsinfo.xslearn.xslearn.navigation.BottomNavigationBar
 import vip.xsinfo.xslearn.xslearn.navigation.DeviceType
 import vip.xsinfo.xslearn.xslearn.navigation.HOME_ROUTE
-import vip.xsinfo.xslearn.xslearn.navigation.PROFILE_ROUTE
+import vip.xsinfo.xslearn.xslearn.navigation.STUDY_ROUTE
 import vip.xsinfo.xslearn.xslearn.navigation.SETTINGS_ROUTE
+import vip.xsinfo.xslearn.xslearn.navigation.ERROR_BOOK_ROUTE
 import vip.xsinfo.xslearn.xslearn.navigation.SideNavigationDrawer
 import vip.xsinfo.xslearn.xslearn.navigation.getDeviceType
 import vip.xsinfo.xslearn.xslearn.screens.HomeScreen
-import vip.xsinfo.xslearn.xslearn.screens.ProfileScreen
+import vip.xsinfo.xslearn.xslearn.screens.StudyScreen
 import vip.xsinfo.xslearn.xslearn.screens.SettingsScreen
+import vip.xsinfo.xslearn.xslearn.screens.ErrorBookScreen
 import vip.xsinfo.xslearn.xslearn.theme.AppTheme
 
 /**
@@ -53,11 +55,14 @@ fun App() {
                         composable(HOME_ROUTE) {
                             HomeScreen()
                         }
-                        composable(PROFILE_ROUTE) {
-                            ProfileScreen()
+                        composable(STUDY_ROUTE) {
+                            StudyScreen()
                         }
                         composable(SETTINGS_ROUTE) {
                             SettingsScreen()
+                        }
+                        composable(ERROR_BOOK_ROUTE) {
+                            ErrorBookScreen()
                         }
                     }
                 }
@@ -76,11 +81,14 @@ fun App() {
                         composable(HOME_ROUTE) {
                             HomeScreen()
                         }
-                        composable(PROFILE_ROUTE) {
-                            ProfileScreen()
+                        composable(STUDY_ROUTE) {
+                            StudyScreen()
                         }
                         composable(SETTINGS_ROUTE) {
                             SettingsScreen()
+                        }
+                        composable(ERROR_BOOK_ROUTE) {
+                            ErrorBookScreen()
                         }
                     }
                 }

@@ -20,9 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import compose.icons.CssGgIcons
+import compose.icons.cssggicons.Bee
 import compose.icons.cssggicons.Home
 import compose.icons.cssggicons.Profile
 import compose.icons.cssggicons.Toolbox
+import compose.icons.cssggicons.EditFade
 
 /**
  * 底部导航栏
@@ -51,11 +53,26 @@ fun BottomNavigationBar(
             )
         )
         NavigationBarItem(
-            selected = currentRoute == PROFILE_ROUTE,
-            onClick = { navController.navigate(PROFILE_ROUTE) },
-            label = { Text("个人") },
+            selected = currentRoute == STUDY_ROUTE,
+            onClick = { navController.navigate(STUDY_ROUTE) },
+            label = { Text("学习") },
             icon = {
-                Icon(CssGgIcons.Profile, contentDescription = null)
+                Icon(CssGgIcons.Bee, contentDescription = null)
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                unselectedIconColor = LocalContentColor.current,
+                unselectedTextColor = LocalContentColor.current,
+                indicatorColor = Color.Transparent // 移除背景色高亮
+            )
+        )
+        NavigationBarItem(
+            selected = currentRoute == ERROR_BOOK_ROUTE,
+            onClick = { navController.navigate(ERROR_BOOK_ROUTE) },
+            label = { Text("错题本") },
+            icon = {
+                Icon(CssGgIcons.EditFade, contentDescription = null)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -95,7 +112,7 @@ fun SideNavigationDrawer(
 ) {
     Column(
         modifier = Modifier
-            .width(120.dp)
+            .width(140.dp)
             .fillMaxSize()
             .padding(top = 16.dp, bottom = 16.dp, start = 5.dp, end = 5.dp)
     ) {
@@ -122,20 +139,43 @@ fun SideNavigationDrawer(
             )
         )
         NavigationDrawerItem(
-            label = { Text("个人") },
+            label = { Text("学习") },
             icon = { 
                 Icon(
-                    imageVector = CssGgIcons.Profile,
-                    contentDescription = "个人",
-                    tint = if (currentRoute == PROFILE_ROUTE) {
+                    imageVector = CssGgIcons.Bee,
+                    contentDescription = "学习",
+                    tint = if (currentRoute == STUDY_ROUTE) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         LocalContentColor.current
                     }
                 ) 
             },
-            selected = currentRoute == PROFILE_ROUTE,
-            onClick = { navController.navigate(PROFILE_ROUTE) },
+            selected = currentRoute == STUDY_ROUTE,
+            onClick = { navController.navigate(STUDY_ROUTE) },
+            colors = NavigationDrawerItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                unselectedIconColor = LocalContentColor.current,
+                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                unselectedContainerColor = Color.Transparent
+            )
+        )
+
+        NavigationDrawerItem(
+            label = { Text("错题本") },
+            icon = {
+                Icon(
+                    imageVector = CssGgIcons.EditFade,
+                    contentDescription = "错题本",
+                    tint = if (currentRoute == ERROR_BOOK_ROUTE) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        LocalContentColor.current
+                    }
+                )
+            },
+            selected = currentRoute == ERROR_BOOK_ROUTE,
+            onClick = { navController.navigate(ERROR_BOOK_ROUTE) },
             colors = NavigationDrawerItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
                 unselectedIconColor = LocalContentColor.current,
