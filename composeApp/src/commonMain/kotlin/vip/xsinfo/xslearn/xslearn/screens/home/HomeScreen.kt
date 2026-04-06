@@ -1,6 +1,7 @@
 package vip.xsinfo.xslearn.xslearn.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,35 +20,36 @@ import vip.xsinfo.xslearn.xslearn.screens.home.components.TodayTasksSection
  */
 @Composable
 fun HomeScreen() {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
-        // 顶部状态栏
-        item {
-            TopBar()
-        }
+    Column(modifier = Modifier.fillMaxSize()) {
+        // 顶部状态栏（固定）
+        TopBar()
         
-        // 考试倒计时专区
-        item {
-            ExamCountdownSection()
-        }
-        
-        // 今日学习待办专区
-        item {
-            TodayTasksSection()
-        }
-        
-        // 订阅科目进度专区
-        item {
-            SubjectProgressSection()
-        }
-        
-        // 学习数据概览专区
-        item {
-            LearningDataSection()
+        // 内容区域（可滚动）
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // 考试倒计时专区
+            item {
+                ExamCountdownSection()
+            }
+            
+            // 今日学习待办专区
+            item {
+                TodayTasksSection()
+            }
+            
+            // 订阅科目进度专区
+            item {
+                SubjectProgressSection()
+            }
+            
+            // 学习数据概览专区
+            item {
+                LearningDataSection()
+            }
         }
     }
 }

@@ -98,48 +98,48 @@ fun FeatureModuleCard(
     color: Color,
     modifier: Modifier = Modifier
 ) {
-    Card(
+    androidx.compose.material3.Button(
+        onClick = { /* 功能模块点击 */ },
         modifier = modifier
             .wrapContentHeight()
-            .clip(RoundedCornerShape(12.dp)),
-        elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = AppColor.Surface,
+            contentColor = AppColor.TextPrimary
+        ),
+        elevation = androidx.compose.material3.ButtonDefaults.buttonElevation(
+            defaultElevation = 4.dp,
+            pressedElevation = 8.dp
         )
     ) {
-        TextButton(
-            onClick = { /* 功能模块点击 */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(16.dp)
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            Box(
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp)
+                    .background(color.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
             ) {
-                Box(
+                Icon(
+                    imageVector = icon,
+                    contentDescription = title,
+                    tint = color,
                     modifier = Modifier
-                        .width(48.dp)
-                        .height(48.dp)
-                        .background(color.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
-                ) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = title,
-                        tint = color,
-                        modifier = Modifier
-                            .width(24.dp)
-                            .height(24.dp)
-                            .align(Alignment.Center)
-                    )
-                }
-                Text(
-                    text = title,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = AppColor.TextPrimary
+                        .width(24.dp)
+                        .height(24.dp)
+                        .align(Alignment.Center)
                 )
             }
+            Text(
+                text = title,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = AppColor.TextPrimary
+            )
         }
     }
 }

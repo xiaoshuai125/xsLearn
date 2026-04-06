@@ -1,11 +1,15 @@
 package vip.xsinfo.xslearn.xslearn
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.NavHostController
@@ -47,10 +51,13 @@ fun App() {
                     bottomBar = {
                         BottomNavigationBar(navController, currentRoute)
                     }
-                ) {
+                ) { paddingValues ->
                     NavHost(
                         navController = navController,
-                        startDestination = HOME_ROUTE
+                        startDestination = HOME_ROUTE,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues)
                     ) {
                         composable(HOME_ROUTE) {
                             HomeScreen()
@@ -69,7 +76,11 @@ fun App() {
             }
             DeviceType.TABLET -> {
                 // 平板设备使用侧边导航栏
-                Row(modifier = Modifier.fillMaxSize()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                ) {
                     // 左侧导航栏
                     SideNavigationDrawer(navController, currentRoute)
                     // 右侧内容区域

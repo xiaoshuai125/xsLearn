@@ -1,6 +1,7 @@
 package vip.xsinfo.xslearn.xslearn.screens.study
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,34 +27,35 @@ fun StudyScreen() {
     )
     var selectedSubject by remember { mutableStateOf(subjects[0]) }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
-        // 顶部状态栏（包含科目选择）
-        item {
-            StudyTopBar(
-                subjects = subjects,
-                selectedSubject = selectedSubject,
-                onSubjectChange = { selectedSubject = it }
-            )
-        }
+    Column(modifier = Modifier.fillMaxSize()) {
+        // 顶部状态栏（固定，包含科目选择）
+        StudyTopBar(
+            subjects = subjects,
+            selectedSubject = selectedSubject,
+            onSubjectChange = { selectedSubject = it }
+        )
         
-        // 功能模块区
-        item {
-            FeatureModulesSection()
-        }
-        
-        // 专项练习区
-        item {
-            PracticeSection()
-        }
-        
-        // 学习数据区
-        item {
-            StudyDataSection()
+        // 内容区域（可滚动）
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // 功能模块区
+            item {
+                FeatureModulesSection()
+            }
+            
+            // 专项练习区
+            item {
+                PracticeSection()
+            }
+            
+            // 学习数据区
+            item {
+                StudyDataSection()
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ import vip.xsinfo.xslearn.xslearn.theme.AppColor
  */
 @Composable
 fun LearningDataSection() {
-    Column {
+    Column(Modifier.padding(bottom = 16.dp)) {
         Text(
             text = "学习数据概览",
             fontSize = 18.sp,

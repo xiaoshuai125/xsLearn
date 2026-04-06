@@ -21,25 +21,27 @@ import vip.xsinfo.xslearn.xslearn.screens.errorbook.components.ErrorListSection
  */
 @Composable
 fun ErrorBookScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // 顶部标题
-        Text(
-            text = "错题本",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+    Column(modifier = Modifier.fillMaxSize()) {
+        // 顶部标题和筛选栏（固定）
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 16.dp)
+        ) {
+            // 顶部标题
+            Text(
+                text = "错题本",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            
+            // 顶部筛选栏
+            FilterSection()
+            
+            Spacer(modifier = Modifier.height(16.dp))
+        }
         
-        // 顶部筛选栏
-        FilterSection()
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        // 错题列表
+        // 错题列表（可滚动）
         ErrorListSection()
     }
 }
