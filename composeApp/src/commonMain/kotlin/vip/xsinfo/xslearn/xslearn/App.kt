@@ -21,10 +21,10 @@ import vip.xsinfo.xslearn.xslearn.navigation.SETTINGS_ROUTE
 import vip.xsinfo.xslearn.xslearn.navigation.ERROR_BOOK_ROUTE
 import vip.xsinfo.xslearn.xslearn.navigation.SideNavigationDrawer
 import vip.xsinfo.xslearn.xslearn.navigation.getDeviceType
-import vip.xsinfo.xslearn.xslearn.screens.HomeScreen
-import vip.xsinfo.xslearn.xslearn.screens.StudyScreen
-import vip.xsinfo.xslearn.xslearn.screens.SettingsScreen
-import vip.xsinfo.xslearn.xslearn.screens.ErrorBookScreen
+import vip.xsinfo.xslearn.xslearn.screens.home.HomeScreen
+import vip.xsinfo.xslearn.xslearn.screens.study.StudyScreen
+import vip.xsinfo.xslearn.xslearn.screens.settings.SettingsScreen
+import vip.xsinfo.xslearn.xslearn.screens.errorbook.ErrorBookScreen
 import vip.xsinfo.xslearn.xslearn.theme.AppTheme
 
 /**

@@ -1,0 +1,6 @@
+# Screens页面规则
+
+页面放在screens目录screens目录下
+然后创建一个xxxx目录，目录下有该页面的主页面xxxxScreen.kt文件，子页面以及components文件夹，components文件夹下有该页面所有页面的组件
+
+

@@ -1,4 +1,4 @@
-package vip.xsinfo.xslearn.xslearn.screens
+package vip.xsinfo.xslearn.xslearn.screens.errorbook.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,180 +14,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import compose.icons.CssGgIcons
-import compose.icons.EvaIcons
 import compose.icons.TablerIcons
-import compose.icons.evaicons.Fill
-import compose.icons.evaicons.fill.Edit
-import compose.icons.evaicons.fill.Refresh
 import compose.icons.tablericons.Atom2
 import compose.icons.tablericons.Edit
 import compose.icons.tablericons.Refresh
 import compose.icons.tablericons.School
 import compose.icons.tablericons.StarOff
-import vip.xsinfo.xslearn.xslearn.theme.AppColor
-
-/**
- * 错题本屏幕
- * 包含：顶部筛选栏、错题列表、核心操作功能
- */
-@Composable
-fun ErrorBookScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // 顶部标题
-        Text(
-            text = "错题本",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        
-        // 顶部筛选栏
-        FilterSection()
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        // 错题列表
-        ErrorListSection()
-    }
-}
-
-/**
- * 顶部筛选栏
- */
-@Composable
-fun FilterSection() {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        // 科目筛选
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "科目：",
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium
-            )
-            FilterChip(
-                selected = true,
-                onClick = { /* 切换全科目 */ },
-                label = { Text("全科目") },
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = AppColor.Primary,
-                    selectedLabelColor = Color.White
-                )
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 切换英语 */ },
-                label = { Text("英语") }
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 切换数学 */ },
-                label = { Text("数学") }
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 切换政治 */ },
-                label = { Text("政治") }
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(12.dp))
-        
-        // 维度筛选
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "筛选：",
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 按知识点筛选 */ },
-                label = { Text("知识点") }
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 按错题时间筛选 */ },
-                label = { Text("时间") }
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 按错误次数筛选 */ },
-                label = { Text("错误次数") }
-            )
-            FilterChip(
-                selected = false,
-                onClick = { /* 按掌握状态筛选 */ },
-                label = { Text("掌握状态") }
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(12.dp))
-        
-        // 批量操作按钮
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            OutlinedButton(
-                onClick = { /* 批量重做 */ },
-                modifier = Modifier.padding(end = 8.dp)
-            ) {
-                Text("批量重做")
-            }
-            OutlinedButton(
-                onClick = { /* 标记已掌握 */ },
-                modifier = Modifier.padding(end = 8.dp)
-            ) {
-                Text("标记已掌握")
-            }
-            OutlinedButton(
-                onClick = { /* 导出错题 */ }
-            ) {
-                Text("导出")
-            }
-        }
-    }
-}
 
 /**
  * 错题数据类
@@ -283,14 +126,12 @@ fun ErrorQuestionCard(question: ErrorQuestion) {
                 ) {
                     Text(
                         text = question.subject,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = AppColor.Primary,
+                        color = Color.Blue,
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(end = 8.dp)
                     )
                     Text(
                         text = question.knowledgePoint,
-                        style = MaterialTheme.typography.bodySmall,
                         color = Color.Gray
                     )
                 }
@@ -306,7 +147,6 @@ fun ErrorQuestionCard(question: ErrorQuestion) {
                 ) {
                     Text(
                         text = question.masteryStatus,
-                        style = MaterialTheme.typography.bodySmall,
                         color = if (question.masteryStatus == "未掌握") Color.Red
                         else if (question.masteryStatus == "部分掌握") Color.Yellow
                         else Color.Green,
@@ -320,7 +160,6 @@ fun ErrorQuestionCard(question: ErrorQuestion) {
             // 题干预览
             Text(
                 text = question.questionPreview,
-                style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 12.dp)
             )
             
@@ -335,13 +174,11 @@ fun ErrorQuestionCard(question: ErrorQuestion) {
                 ) {
                     Text(
                         text = "错误次数: ${question.errorCount}",
-                        style = MaterialTheme.typography.bodySmall,
                         color = Color.Gray,
                         modifier = Modifier.padding(end = 16.dp)
                     )
                     Text(
                         text = "最近重做: ${question.lastReviewTime}",
-                        style = MaterialTheme.typography.bodySmall,
                         color = Color.Gray
                     )
                 }
