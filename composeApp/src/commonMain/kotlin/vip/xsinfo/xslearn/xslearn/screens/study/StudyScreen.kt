@@ -1,30 +1,27 @@
 package vip.xsinfo.xslearn.xslearn.screens.study
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import vip.xsinfo.xslearn.xslearn.screens.study.components.StudyTopBar
-import vip.xsinfo.xslearn.xslearn.screens.study.components.FeatureModulesSection
-import vip.xsinfo.xslearn.xslearn.screens.study.components.PracticeSection
-import vip.xsinfo.xslearn.xslearn.screens.study.components.StudyDataSection
+import vip.xsinfo.xslearn.xslearn.screens.vocabulary.viewmodel.VocabularyViewModel
 
 /**
  * 学习中心页面
  */
 @Composable
-fun StudyScreen() {
-    val subjects = listOf(
-        "学位英语", "考研英语二", "考研数学二", "考研政治", "数据结构", "计算机组成原理", "操作系统", "计算机网络"
-    )
+fun StudyScreen(
+    navController: NavHostController,
+    viewModel: VocabularyViewModel,
+    onNavigateToVocabulary: () -> Unit
+) {
+    val subjects = SubjectType.values().toList()
     var selectedSubject by remember { mutableStateOf(subjects[0]) }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -35,26 +32,25 @@ fun StudyScreen() {
             onSubjectChange = { selectedSubject = it }
         )
         
-        // 内容区域（可滚动）
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            // 功能模块区
-            item {
-                FeatureModulesSection()
+        // 根据选择的科目类型显示不同的页面
+        when (selectedSubject) {
+            SubjectType.DEGREE_ENGLISH, SubjectType.POSTGRADUATE_ENGLISH_2 -> {
+                EnglishSubjectScreen(
+                    subjectType = selectedSubject,
+                    navController = navController,
+                    viewModel = viewModel,
+                    onNavigateToVocabulary = onNavigateToVocabulary
+                )
             }
-            
-            // 专项练习区
-            item {
-                PracticeSection()
+            SubjectType.POSTGRADUATE_MATH_2 -> {
+                MathSubjectScreen(selectedSubject)
             }
-            
-            // 学习数据区
-            item {
-                StudyDataSection()
+            SubjectType.POSTGRADUATE_POLITICS -> {
+                PoliticsSubjectScreen(selectedSubject)
+            }
+            SubjectType.DATA_STRUCTURE, SubjectType.COMPUTER_ORGANIZATION, 
+            SubjectType.OPERATING_SYSTEM, SubjectType.COMPUTER_NETWORK -> {
+                CS408SubjectScreen(selectedSubject)
             }
         }
     }

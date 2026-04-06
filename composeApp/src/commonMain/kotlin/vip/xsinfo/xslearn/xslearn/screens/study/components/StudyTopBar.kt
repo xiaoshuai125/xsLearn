@@ -28,6 +28,7 @@ import compose.icons.tablericons.ChevronRight
 import compose.icons.tablericons.Edit
 import compose.icons.tablericons.Search
 import compose.icons.tablericons.Star
+import vip.xsinfo.xslearn.xslearn.screens.study.SubjectType
 import vip.xsinfo.xslearn.xslearn.theme.AppColor
 
 /**
@@ -35,9 +36,9 @@ import vip.xsinfo.xslearn.xslearn.theme.AppColor
  */
 @Composable
 fun StudyTopBar(
-    subjects: List<String>,
-    selectedSubject: String,
-    onSubjectChange: (String) -> Unit
+    subjects: List<SubjectType>,
+    selectedSubject: SubjectType,
+    onSubjectChange: (SubjectType) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -72,7 +73,7 @@ fun StudyTopBar(
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = selectedSubject,
+                                text = selectedSubject.displayName,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = AppColor.Primary
                             )
@@ -89,7 +90,7 @@ fun StudyTopBar(
                     ) {
                         subjects.forEach { subject ->
                             DropdownMenuItem(
-                                text = { Text(subject) },
+                                text = { Text(subject.displayName) },
                                 onClick = {
                                     onSubjectChange(subject)
                                     expanded = false

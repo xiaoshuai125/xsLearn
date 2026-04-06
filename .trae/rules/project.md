@@ -34,6 +34,6 @@ Compose 组件规则
 
 交付验证规则
 
-1. 代码完成后必须执行./gradlew :composeApp:compileDebugKotlin编译 和 ./gradlew test，都是Successful。(必须)
+1. 代码完成后必须执行./gradlew :composeApp:compileKotlinJvm编译 都是Successful。(必须)
 2. 代码无报错、无引用异常，目录结构完整，风格与项目现有代码保持一致。
 

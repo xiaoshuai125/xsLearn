@@ -96,10 +96,11 @@ fun FeatureModuleCard(
     title: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     color: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = { /* 功能模块点击 */ }
 ) {
     androidx.compose.material3.Button(
-        onClick = { /* 功能模块点击 */ },
+        onClick = onClick,
         modifier = modifier
             .wrapContentHeight()
             .fillMaxWidth(),
