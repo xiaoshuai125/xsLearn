@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -62,15 +65,14 @@ fun DynamicShapes() {
         // 随机大小
         val size = (60 + (index * 20)) % 80 + 60 // 60-140dp
         
-        // 随机动画 duration
-        val durationX = 12000 + (index * 2000) // 12-20秒
-        val durationY = 14000 + (index * 1500) // 14-19.5秒
+        // 随机动画 duration - 增加时间，让移动更慢
+        val durationX = 20000 + (index * 3000) // 20-32秒
+        val durationY = 24000 + (index * 2500) // 24-34秒
         
-        // 每个形状对应一种类型
-        val shapeType = when (index % 3) {
+        // 每个形状对应一种类型，只使用圆形和三角形
+        val shapeType = when (index % 2) {
             0 -> ShapeType.CIRCLE
             1 -> ShapeType.TRIANGLE
-            2 -> ShapeType.SQUARE
             else -> ShapeType.CIRCLE
         }
         
@@ -113,6 +115,23 @@ fun DynamicShapes() {
             )
         )
         
+        // 为三角形添加旋转动画
+        val rotation by if (shapeData.shapeType == ShapeType.TRIANGLE) {
+            infiniteTransition.animateFloat(
+                initialValue = -30f, // -30度，增加旋转幅度
+                targetValue = 30f, // 30度，增加旋转幅度
+                animationSpec = infiniteRepeatable(
+                    animation = tween(
+                        durationMillis = 8000, // 8秒
+                        easing = LinearEasing
+                    ),
+                    repeatMode = RepeatMode.Reverse
+                )
+            )
+        } else {
+            remember { mutableStateOf(0f) }
+        }
+        
         // 绘制形状
         Canvas(modifier = Modifier.fillMaxSize()) {
             val shapeSize = shapeData.size.toPx()
@@ -129,10 +148,29 @@ fun DynamicShapes() {
                     )
                 }
                 ShapeType.TRIANGLE -> {
+                    // 计算旋转后的三角形顶点
+                    val angle = Math.toRadians(rotation.toDouble())
+                    val cos = kotlin.math.cos(angle)
+                    val sin = kotlin.math.sin(angle)
+                    
+                    // 三角形的三个顶点（相对于中心）
+                    val points: List<Pair<Float, Float>> = listOf(
+                        Pair(0f, -shapeSize / 2), // 顶点
+                        Pair(shapeSize / 2, shapeSize / 2), // 右下
+                        Pair(-shapeSize / 2, shapeSize / 2) // 左下
+                    )
+                    
+                    // 旋转并平移顶点
+                    val rotatedPoints = points.map { (x, y) ->
+                        val rotatedX = (x * cos - y * sin).toFloat()
+                        val rotatedY = (x * sin + y * cos).toFloat()
+                        Offset(centerX + rotatedX, centerY + rotatedY)
+                    }
+                    
                     val trianglePath = Path().apply {
-                        moveTo(centerX, centerY - shapeSize / 2)
-                        lineTo(centerX + shapeSize / 2, centerY + shapeSize / 2)
-                        lineTo(centerX - shapeSize / 2, centerY + shapeSize / 2)
+                        moveTo(rotatedPoints[0].x, rotatedPoints[0].y)
+                        lineTo(rotatedPoints[1].x, rotatedPoints[1].y)
+                        lineTo(rotatedPoints[2].x, rotatedPoints[2].y)
                         close()
                     }
                     drawPath(
@@ -141,11 +179,7 @@ fun DynamicShapes() {
                     )
                 }
                 ShapeType.SQUARE -> {
-                    drawRect(
-                        color = shapeData.color,
-                        topLeft = Offset(centerX - shapeSize / 2, centerY - shapeSize / 2),
-                        size = Size(shapeSize, shapeSize)
-                    )
+                    // 不再绘制正方形
                 }
             }
         }

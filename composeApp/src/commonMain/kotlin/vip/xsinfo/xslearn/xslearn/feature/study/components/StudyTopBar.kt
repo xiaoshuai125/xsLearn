@@ -56,14 +56,7 @@ fun StudyTopBar(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(
-                    text = "当前科目：",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = AppColor.TextPrimary
-                )
                 var expanded by remember { mutableStateOf(false) }
-                
                 Box {
                     TextButton(
                         onClick = { expanded = true }

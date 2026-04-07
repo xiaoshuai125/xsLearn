@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -130,7 +131,7 @@ private fun PhoneLayout(
         NavHost(
             navController = navController,
             startDestination = HOME_ROUTE,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(bottom = paddingValues.calculateBottomPadding())
         ) {
             composable(HOME_ROUTE) { HomeScreen() }
             composable(STUDY_ROUTE) {
@@ -145,7 +146,6 @@ private fun PhoneLayout(
         }
     }
 }
-
 @Composable
 private fun TabletLayout(
     navController: NavHostController,

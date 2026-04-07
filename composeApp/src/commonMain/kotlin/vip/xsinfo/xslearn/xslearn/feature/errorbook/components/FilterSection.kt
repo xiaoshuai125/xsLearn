@@ -23,9 +23,11 @@ import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
  * 顶部筛选栏
  */
 @Composable
-fun FilterSection() {
+fun FilterSection(
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         // 科目筛选
         Row(
