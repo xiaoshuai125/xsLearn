@@ -6,6 +6,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -26,7 +27,7 @@ fun AppTheme(
             primaryContainer = AppColor.PrimaryLight,
             secondary = AppColor.Secondary,
             secondaryContainer = AppColor.SecondaryLight,
-            background = AppColor.Background,
+            background = Color.Transparent,
             surface = AppColor.Surface,
             error = AppColor.Error,
             onPrimary = AppColor.White,
@@ -41,7 +42,7 @@ fun AppTheme(
             primaryContainer = AppColor.PrimaryLight,
             secondary = AppColor.Secondary,
             secondaryContainer = AppColor.SecondaryLight,
-            background = AppColor.Background,
+            background = Color.Transparent,
             surface = AppColor.Surface,
             error = AppColor.Error,
             onPrimary = AppColor.White,

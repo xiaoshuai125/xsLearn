@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 专项练习区
@@ -81,17 +79,9 @@ data class PracticeItem(
  */
 @Composable
 fun PracticeItemCard(item: PracticeItem) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
-        )
-    ) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically

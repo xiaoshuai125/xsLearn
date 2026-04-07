@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 学习页面数据区
@@ -71,17 +69,9 @@ fun StudyDataCard(
     color: Color,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
-        )
-    ) {
+    AppCard(modifier = modifier) {
         Column(
             modifier = Modifier
-                .padding(12.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center

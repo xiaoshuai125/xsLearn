@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 学习数据概览专区
@@ -70,17 +68,9 @@ fun LearningDataSection() {
         Spacer(modifier = Modifier.height(16.dp))
         
         // 近7天学习时长折线图（模拟）
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            elevation = CardDefaults.cardElevation(4.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = AppColor.Surface
-            )
-        ) {
+        AppCard(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier
-                    .padding(16.dp)
                     .fillMaxWidth()
             ) {
                 Text(
@@ -120,17 +110,9 @@ fun DataCard(
     color: Color,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
-        )
-    ) {
+    AppCard(modifier = modifier) {
         Column(
             modifier = Modifier
-                .padding(12.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)

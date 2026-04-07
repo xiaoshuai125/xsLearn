@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import compose.icons.CssGgIcons
 import compose.icons.cssggicons.Add
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 今日学习待办专区
@@ -102,17 +100,9 @@ data class Task(
 fun TaskItem(task: Task) {
     var isCompleted by remember { mutableStateOf(task.completed) }
     
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
-        )
-    ) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {

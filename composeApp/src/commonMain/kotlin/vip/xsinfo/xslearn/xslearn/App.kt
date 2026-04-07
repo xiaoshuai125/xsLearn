@@ -42,6 +42,7 @@ import vip.xsinfo.xslearn.xslearn.feature.vocabulary.viewmodel.VocabularyViewMod
 import vip.xsinfo.xslearn.xslearn.feature.settings.SettingsScreen
 import vip.xsinfo.xslearn.xslearn.feature.errorbook.ErrorBookScreen
 import vip.xsinfo.xslearn.xslearn.core.theme.AppTheme
+import vip.xsinfo.xslearn.xslearn.shared.components.DynamicBackground
 
 @Composable
 @Preview
@@ -89,24 +90,29 @@ fun AppBase(
     onNavigateToVocabulary: () -> Unit
 ) {
     AppTheme {
-        val navController = rememberNavController()
-        val backStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = backStackEntry?.destination?.route
-        val deviceType = getDeviceType()
+        Box(modifier = Modifier.fillMaxSize()) {
+            // 动态背景
+            DynamicBackground()
+            
+            val navController = rememberNavController()
+            val backStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = backStackEntry?.destination?.route
+            val deviceType = getDeviceType()
 
-        when (deviceType) {
-            DeviceType.PHONE -> PhoneLayout(
-                navController = navController,
-                currentRoute = currentRoute,
-                viewModel = viewModel,
-                onNavigateToVocabulary = onNavigateToVocabulary
-            )
-            DeviceType.TABLET -> TabletLayout(
-                navController = navController,
-                currentRoute = currentRoute,
-                viewModel = viewModel,
-                onNavigateToVocabulary = onNavigateToVocabulary
-            )
+            when (deviceType) {
+                DeviceType.PHONE -> PhoneLayout(
+                    navController = navController,
+                    currentRoute = currentRoute,
+                    viewModel = viewModel,
+                    onNavigateToVocabulary = onNavigateToVocabulary
+                )
+                DeviceType.TABLET -> TabletLayout(
+                    navController = navController,
+                    currentRoute = currentRoute,
+                    viewModel = viewModel,
+                    onNavigateToVocabulary = onNavigateToVocabulary
+                )
+            }
         }
     }
 }
@@ -124,7 +130,7 @@ private fun PhoneLayout(
         NavHost(
             navController = navController,
             startDestination = HOME_ROUTE,
-            modifier = Modifier.fillMaxSize().padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         ) {
             composable(HOME_ROUTE) { HomeScreen() }
             composable(STUDY_ROUTE) {
@@ -148,7 +154,7 @@ private fun TabletLayout(
     onNavigateToVocabulary: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        modifier = Modifier.fillMaxSize()
     ) {
         SideNavigationDrawer(navController, currentRoute)
         NavHost(

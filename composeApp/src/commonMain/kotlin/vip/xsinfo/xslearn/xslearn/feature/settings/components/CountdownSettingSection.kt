@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -20,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import compose.icons.TablerIcons
 import compose.icons.tablericons.Edit
 import compose.icons.tablericons.Trash
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 考试倒计时设置专区
@@ -72,9 +71,8 @@ data class ExamItem(
  */
 @Composable
 fun ExamItemCard(exam: ExamItem) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(2.dp)
+    AppCard(
+        modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier

@@ -11,11 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -31,6 +30,7 @@ import compose.icons.tablericons.Edit
 import compose.icons.tablericons.Refresh
 import compose.icons.tablericons.School
 import compose.icons.tablericons.StarOff
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 错题数据类
@@ -93,7 +93,7 @@ val errorQuestions = listOf(
 @Composable
 fun ErrorListSection() {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(errorQuestions) { question ->
@@ -107,14 +107,11 @@ fun ErrorListSection() {
  */
 @Composable
 fun ErrorQuestionCard(question: ErrorQuestion) {
-    Card(
+    AppCard(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        padding = PaddingValues(16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
+        Column {
             // 题目来源
             Row(
                 modifier = Modifier.fillMaxWidth(),

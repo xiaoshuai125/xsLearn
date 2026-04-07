@@ -26,6 +26,7 @@ import compose.icons.tablericons.Book
 import compose.icons.tablericons.Edit
 import compose.icons.tablericons.FileText
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
 
 /**
  * 功能模块区
@@ -95,25 +96,15 @@ fun FeatureModuleCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { /* 功能模块点击 */ }
 ) {
-    androidx.compose.material3.Button(
-        onClick = onClick,
+    AppCard(
         modifier = modifier
             .wrapContentHeight()
             .fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-            containerColor = AppColor.Surface,
-            contentColor = AppColor.TextPrimary
-        ),
-        elevation = androidx.compose.material3.ButtonDefaults.buttonElevation(
-            defaultElevation = 4.dp,
-            pressedElevation = 8.dp
-        )
+        onClick = onClick
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Box(
                 modifier = Modifier
