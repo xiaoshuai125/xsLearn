@@ -6,12 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
+import vip.xsinfo.xslearn.xslearn.shared.components.AppCard
+import vip.xsinfo.xslearn.xslearn.shared.components.AppSecondaryText
+import vip.xsinfo.xslearn.xslearn.shared.components.AppTextButton
+import vip.xsinfo.xslearn.xslearn.shared.components.AppWidgetTitle
 
 /**
  * 考试倒计时专区
@@ -31,18 +30,8 @@ fun ExamCountdownSection() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "考试倒计时",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = AppColor.TextPrimary
-            )
-            TextButton(onClick = { /* 跳转到设置 */ }) {
-                Text(
-                    text = "设置",
-                    color = AppColor.Primary
-                )
-            }
+            AppWidgetTitle(text = "考试倒计时")
+            AppTextButton(text = "设置", onClick = { /* 跳转到设置 */ })
         }
         
         Spacer(modifier = Modifier.height(12.dp))
@@ -78,42 +67,21 @@ fun CountdownCard(
     examDate: String,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = AppColor.Surface
-        )
-    ) {
+    AppCard(modifier = modifier) {
         Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(
-                text = examName,
-                fontSize = 14.sp,
-                color = AppColor.TextSecondary
-            )
+            AppSecondaryText(text = examName)
             Text(
                 text = daysLeft.toString(),
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 color = AppColor.Primary
             )
-            Text(
-                text = "剩余天数",
-                fontSize = 12.sp,
-                color = AppColor.TextSecondary
-            )
-            Text(
-                text = examDate,
-                fontSize = 12.sp,
-                color = AppColor.TextSecondary
-            )
+            AppSecondaryText(text = "剩余天数")
+            AppSecondaryText(text = examDate)
         }
     }
 }
