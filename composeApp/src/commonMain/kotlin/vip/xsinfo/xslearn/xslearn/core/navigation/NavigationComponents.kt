@@ -135,7 +135,7 @@ fun SideNavigationDrawer(
 ) {
     Box(
         modifier = Modifier
-            .width(140.dp)
+            .width(150.dp)
             .fillMaxSize()
             .padding(top = 16.dp, bottom = 16.dp, start = 5.dp, end = 5.dp)
             .clip(RoundedCornerShape(16.dp))
