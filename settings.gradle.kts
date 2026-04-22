@@ -30,15 +30,15 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
+        google()
+        gradlePluginPortal()
+        maven { setUrl("https://maven.aliyun.com/repository/gradle-plugin") }
         maven { setUrl("https://maven.aliyun.com/repository/central") }
         maven { setUrl("https://maven.aliyun.com/repository/jcenter") }
         maven { setUrl("https://maven.aliyun.com/repository/google") }
-        maven { setUrl("https://maven.aliyun.com/repository/gradle-plugin") }
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         maven { setUrl("https://jitpack.io") }
-        google()
         mavenCentral()
-        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -55,9 +55,9 @@ dependencyResolutionManagement {
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-}
+//plugins {
+//    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+//}
 
 include(":composeApp")
 include(":server")
