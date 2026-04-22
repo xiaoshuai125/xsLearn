@@ -13,6 +13,7 @@ enum class SubjectType(
     // 英语类科目
     DEGREE_ENGLISH("学位英语", isEnglish = true),
     POSTGRADUATE_ENGLISH_2("考研英语二", isEnglish = true),
+    JUNIOR_COLLEGE_TO_UNIVERSITY_ENGLISH("专升本英语", isEnglish = true),
     
     // 数学类科目
     POSTGRADUATE_MATH_2("考研数学二", isMath = true),

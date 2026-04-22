@@ -133,6 +133,82 @@ object VocabularyData {
             phonetic = "ˈæbstrækt",
             example = "Abstract art can be difficult to understand.",
             collocations = listOf("abstract concept", "abstract idea", "abstract thinking")
+        )
+    )
+    
+    /**
+     * 专升本英语词汇库
+     */
+    private val juniorCollegeToUniversityEnglishWords = listOf(
+        Word(
+            word = "abandon",
+            meaning = "放弃，抛弃",
+            phonetic = "əˈbændən",
+            example = "She abandoned her plans to become an actress.",
+            collocations = listOf("abandon hope", "abandon ship", "abandoned building")
+        ),
+        Word(
+            word = "ability",
+            meaning = "能力，才能",
+            phonetic = "əˈbɪləti",
+            example = "She has the ability to speak five languages.",
+            collocations = listOf("have the ability to", "ability to do sth", "mental ability")
+        ),
+        Word(
+            word = "able",
+            meaning = "能够，有能力的",
+            phonetic = "ˈeɪbl",
+            example = "I am able to swim.",
+            collocations = listOf("be able to", "able to do sth", "financially able")
+        ),
+        Word(
+            word = "about",
+            meaning = "关于，大约",
+            phonetic = "əˈbaʊt",
+            example = "Let's talk about the weather.",
+            collocations = listOf("about time", "about face", "around about")
+        ),
+        Word(
+            word = "above",
+            meaning = "在...上面",
+            phonetic = "əˈbʌv",
+            example = "The bird is flying above the tree.",
+            collocations = listOf("above all", "above average", "above sea level")
+        ),
+        Word(
+            word = "abroad",
+            meaning = "在国外，到国外",
+            phonetic = "əˈbrɔːd",
+            example = "He studied abroad for three years.",
+            collocations = listOf("go abroad", "study abroad", "live abroad")
+        ),
+        Word(
+            word = "absence",
+            meaning = "缺席，不在场",
+            phonetic = "ˈæbsəns",
+            example = "His absence from the meeting was noticed.",
+            collocations = listOf("absence from", "in the absence of", "absence of evidence")
+        ),
+        Word(
+            word = "absolute",
+            meaning = "绝对的，完全的",
+            phonetic = "ˈæbsəluːt",
+            example = "The absolute truth is hard to find.",
+            collocations = listOf("absolute truth", "absolute power", "absolute majority")
+        ),
+        Word(
+            word = "absorb",
+            meaning = "吸收，吸引",
+            phonetic = "əbˈsɔːrb",
+            example = "The sponge absorbs water quickly.",
+            collocations = listOf("absorb water", "absorb information", "absorb costs")
+        ),
+        Word(
+            word = "abstract",
+            meaning = "抽象的，理论的",
+            phonetic = "ˈæbstrækt",
+            example = "Abstract art can be difficult to understand.",
+            collocations = listOf("abstract concept", "abstract idea", "abstract thinking")
         ),
         Word(
             word = "abundant",
@@ -368,7 +444,7 @@ object VocabularyData {
         Word(
             word = "additional",
             meaning = "额外的，附加的",
-            phonetic = "əˈdɪʃənl",
+            phonetic = "əˈdɪʃnəl",
             example = "We need additional help.",
             collocations = listOf("additional help", "additional cost", "additional information")
         ),
@@ -1344,77 +1420,6 @@ object VocabularyData {
             phonetic = "əˈproʊpriət",
             example = "The dress is appropriate for the occasion.",
             collocations = listOf("appropriate for", "appropriate behavior", "appropriate response")
-        ),
-        Word(
-            word = "approval",
-            meaning = "批准，认可",
-            phonetic = "əˈpruːvl",
-            example = "The project received approval.",
-            collocations = listOf("receive approval", "approval of", "official approval")
-        ),
-        Word(
-            word = "approve",
-            meaning = "批准，赞成",
-            phonetic = "əˈpruːv",
-            example = "The manager approved the plan.",
-            collocations = listOf("approve a plan", "approve of", "officially approve")
-        ),
-        Word(
-            word = "approximate",
-            meaning = "近似的，大约的",
-            phonetic = "əˈprɑːksɪmət",
-            example = "The approximate cost is $100.",
-            collocations = listOf("approximate cost", "approximate time", "approximate value")
-        ),
-        Word(
-            word = "approximately",
-            meaning = "大约，近似地",
-            phonetic = "əˈprɑːksɪmətli",
-            example = "There are approximately 100 people.",
-            collocations = listOf("approximately", "about", "roughly")
-        ),
-        Word(
-            word = "apron",
-            meaning = "围裙",
-            phonetic = "ˈeɪprən",
-            example = "She wore an apron while cooking.",
-            collocations = listOf("cooking apron", "apron strings", "apron pocket")
-        ),
-        Word(
-            word = "arbitrary",
-            meaning = "任意的，武断的",
-            phonetic = "ˈɑːrbɪtreri",
-            example = "The decision was arbitrary.",
-            collocations = listOf("arbitrary decision", "arbitrary rule", "arbitrary choice")
-        ),
-        Word(
-            word = "arch",
-            meaning = "拱门，弓形",
-            phonetic = "ɑːrtʃ",
-            example = "The arch is beautiful.",
-            collocations = listOf("stone arch", "arch bridge", "arch doorway")
-        ),
-        Word(
-            word = "architect",
-            meaning = "建筑师",
-            phonetic = "ˈɑːrkɪtekt",
-            example = "He is an architect.",
-            collocations = listOf("famous architect", "architectural design", "architectural firm")
-        ),
-        Word(
-            word = "architecture",
-            meaning = "建筑，建筑学",
-            phonetic = "ˈɑːrkɪtektʃər",
-            example = "The architecture is impressive.",
-            collocations = listOf("modern architecture", "classical architecture", "architectural style")
-        ),
-        Word(
-            word = "area",
-            meaning = "区域，面积",
-            phonetic = "ˈeriə",
-            example = "The area is large.",
-            collocations = listOf("urban area", "rural area", "area of study")
-        ),
-        Word(
-            word = "argue",
-            meaning = "争论，辩论
+        )
+    )
+}
