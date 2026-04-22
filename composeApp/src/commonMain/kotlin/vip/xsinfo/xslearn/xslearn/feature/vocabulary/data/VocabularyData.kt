@@ -6,12 +6,11 @@ import vip.xsinfo.xslearn.xslearn.feature.vocabulary.data.wordlists.JuniorColleg
 import vip.xsinfo.xslearn.xslearn.feature.vocabulary.data.wordlists.PostgraduateEnglishWordList
 
 /**
- * 词库数据管理
+ * 词汇数据管理
  */
 object VocabularyData {
-    
     /**
-     * 根据科目类型获取词库
+     * 根据科目类型获取单词列表
      */
     fun getWordList(subjectType: SubjectType): List<Word> {
         return when (subjectType) {
