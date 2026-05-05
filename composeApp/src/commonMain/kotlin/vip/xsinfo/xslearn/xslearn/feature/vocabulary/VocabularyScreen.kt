@@ -1,10 +1,17 @@
 package vip.xsinfo.xslearn.xslearn.feature.vocabulary
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import vip.xsinfo.xslearn.xslearn.feature.vocabulary.components.VocabularyBottomBar
@@ -30,84 +38,94 @@ import vip.xsinfo.xslearn.xslearn.core.theme.AppColor
 fun VocabularyScreen(
     viewModel: VocabularyViewModel
 ) {
-    // 获取词库
     val wordList = VocabularyData.getWordList(viewModel.subjectType)
 
     var currentIndex by remember { mutableStateOf(0) }
     var showAnswer by remember { mutableStateOf(false) }
     val currentWord = wordList.getOrNull(currentIndex)
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppColor.Background),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(AppColor.Background)
+            .systemBarsPadding()
     ) {
-        // 顶部导航栏
-        VocabularyTopBar(
-            viewModel = viewModel
-        )
-
-        // 智能推荐学习模式，无需用户选择
-
-        // 单词卡片区域
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (currentWord != null) {
+            VocabularyTopBar(
+                viewModel = viewModel,
+                currentIndex = currentIndex,
+                totalWords = wordList.size
+            )
+
+            if (wordList.isNotEmpty() && currentWord != null) {
+                AnimatedContent(
+                    targetState = currentIndex,
+                    transitionSpec = {
+                        fadeIn() togetherWith fadeOut()
+                    },
+                    label = "WordCardAnimation"
+                ) { _ ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                            .padding(horizontal = 20.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        WordCard(
+                            word = currentWord,
+                            showAnswer = showAnswer
+                        )
+                    }
+                }
+            } else {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .weight(1f)
+                        .padding(horizontal = 20.dp),
+                    verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // 智能推荐学习模式：看汉语想英语
-                    WordCard(
-                        word = currentWord,
-                        showAnswer = showAnswer
+                    Text(
+                        text = "词库为空",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = AppColor.TextSecondary
                     )
                 }
-            } else {
-                Text(
-                    text = "词库为空",
-                    fontSize = 20.sp,
-                    color = AppColor.TextSecondary
+            }
+
+            if (wordList.isNotEmpty()) {
+                VocabularyBottomBar(
+                    currentIndex = currentIndex,
+                    totalWords = wordList.size,
+                    showAnswer = showAnswer,
+                    onViewAnswer = { showAnswer = true },
+                    onMarkKnown = {
+                        if (currentIndex < wordList.size - 1) {
+                            currentIndex++
+                            showAnswer = false
+                        }
+                    },
+                    onMarkUncertain = {
+                        if (currentIndex < wordList.size - 1) {
+                            currentIndex++
+                            showAnswer = false
+                        }
+                    },
+                    onMarkUnknown = {
+                        if (currentIndex < wordList.size - 1) {
+                            currentIndex++
+                            showAnswer = false
+                        }
+                    }
                 )
             }
-        }
-
-        // 底部操作区域
-        if (wordList.isNotEmpty()) {
-            VocabularyBottomBar(
-                currentIndex = currentIndex,
-                totalWords = wordList.size,
-                showAnswer = showAnswer,
-                onViewAnswer = { showAnswer = true },
-                onMarkKnown = {
-                    // 标记为认识，继续下一个单词
-                    if (currentIndex < wordList.size - 1) {
-                        currentIndex++
-                        showAnswer = false
-                    }
-                },
-                onMarkUncertain = {
-                    // 标记为模糊，继续下一个单词
-                    if (currentIndex < wordList.size - 1) {
-                        currentIndex++
-                        showAnswer = false
-                    }
-                },
-                onMarkUnknown = {
-                    // 标记为不认识，继续下一个单词
-                    if (currentIndex < wordList.size - 1) {
-                        currentIndex++
-                        showAnswer = false
-                    }
-                }
-            )
         }
     }
 }
